@@ -8,9 +8,5 @@ export default function Home() {
       return <h1>Loading...</h1>
    }
 
-   return (
-      <div>
-         {session ? <p>You are logged in!</p> : <p>You are not logged in 😞</p>}
-      </div>
-   )
+   return <div>{session ? <NewTweet /> : <p>You are not logged in 😞</p>}</div>
 }
