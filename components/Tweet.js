@@ -1,3 +1,10 @@
+import timeago from "lib/timeago"
+
 export default function Tweet({ tweet }) {
-   return <p>{tweet.content}</p>
+   return (
+      <p>
+         {timeago.format(new Date(tweet.createdAt))}
+         {tweet.content}
+      </p>
+   )
 }
