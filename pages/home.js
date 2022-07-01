@@ -1,12 +1,23 @@
 import { useSession } from "next-auth/react"
 import NewTweet from "components/NewTweet"
+import Tweets from "components/Tweets"
 
 export default function Home() {
    const { data: session, status } = useSession()
+   const loading = status === "loading"
 
-   if (status === "loading") {
-      return <h1>Loading...</h1>
+   if (loading) {
+      return null
    }
 
-   return <div>{session ? <NewTweet /> : <p>You are not logged in</p>}</div>
+   if (!session) {
+      Router.push("/")
+   }
+
+   return (
+      <>
+         <NewTweet />
+         <Tweets tweets={[{ content: "test" }, { content: "another" }]} />
+      </>
+   )
 }
