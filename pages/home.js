@@ -4,6 +4,7 @@ import NewTweet from "components/NewTweet"
 import Tweets from "components/Tweets"
 import prisma from "lib/prisma"
 import { getTweets } from "lib/data.js"
+import LoadMore from "components/LoadMore"
 
 export default function Home({ tweets }) {
    const router = useRouter()
@@ -26,12 +27,13 @@ export default function Home({ tweets }) {
       <>
          <NewTweet />
          <Tweets tweets={tweets} />
+         <LoadMore tweets={tweets} />
       </>
    )
 }
 
 export async function getServerSideProps() {
-   let tweets = await getTweets(prisma)
+   let tweets = await getTweets(prisma, 2)
    tweets = JSON.parse(JSON.stringify(tweets))
 
    return {
