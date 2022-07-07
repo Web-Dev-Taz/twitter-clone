@@ -1,4 +1,4 @@
-export default function LoadMore({ tweets }) {
+export default function LoadMore({ tweets, setTweets }) {
    return (
       <div className="mt-10 flex justify-center">
          <button
@@ -8,6 +8,8 @@ export default function LoadMore({ tweets }) {
                const res = await fetch(
                   `/api/tweets?take=2&cursor=${lastTweetId}`
                )
+               const data = await res.json()
+               setTweets([...tweets, ...data])
             }}
          >
             Load more
